@@ -1,7 +1,6 @@
 let assert = require('assert');
 let {board,
-    initGrid,
-    separateRowColumn
+    players
 } = require('../src/library.js');
 
 describe('display board',function(){
@@ -21,5 +20,16 @@ describe('insert into board',function(){
                           [' ',' ',' '],
                           [' ',' ',' ']];
     assert.deepEqual(board.insert('X',3),expectedOutput);
+  });
+});
+
+describe('current player detail',function(){
+  it('should return current player object',function(){
+    let player1 = {'name' : 'ankon',
+                   'moves': [1,2,3,4,5]};
+    let player2 = {'name' : 'dheeraj',
+                   'moves': [6,7,8,9]};
+    assert.deepEqual(players.crntPlayer(),player1);
+    assert.deepEqual(players.crntPlayer(),player2);
   });
 });
