@@ -8,7 +8,8 @@ const initGrid = function(){
 
 const separateRowColumn = function(position){
   let object = {'row':Math.floor((position-1)/3),
-                'column':(position-1)%3};
+                'column':(position-1)%3
+               };
   return object;
 }
  
