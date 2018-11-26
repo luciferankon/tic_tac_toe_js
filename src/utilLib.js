@@ -13,5 +13,13 @@ const separateRowColumn = function(position){
   return object;
 }
  
+const isSubset = function(superSet, subset) {
+  const isIncluded = function(item) {
+    return superSet.includes(item);
+  }
+  return subset.every(isIncluded);
+}
+
 exports.initGrid = initGrid;
 exports.separateRowColumn = separateRowColumn;
+exports.isSubset = isSubset;
