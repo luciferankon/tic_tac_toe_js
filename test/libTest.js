@@ -26,10 +26,17 @@ describe('insert into board',function(){
 describe('current player detail',function(){
   it('should return current player object',function(){
     let player1 = {'name' : 'ankon',
-                   'moves': [1,2,3,4,5]};
+                   'moves': []};
     let player2 = {'name' : 'dheeraj',
-                   'moves': [6,7,8,9]};
+                   'moves': []};
     assert.deepEqual(players.crntPlayer(),player1);
     assert.deepEqual(players.crntPlayer(),player2);
+  });
+});
+
+describe('update player moveset',function(){
+  it('should return updated array of moves',function(){
+    assert.deepEqual(players.updateMoves(6),[6]);
+    assert.deepEqual(players.updateMoves(2),[2]);
   });
 });

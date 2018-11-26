@@ -19,14 +19,19 @@ let board = {
 let players = {
   'counter' : 0,
   '1': {'name' : 'ankon',
-        'moves' : [1,2,3,4,5]
+        'moves' : []
        },
   '2': {'name' : 'dheeraj',
-        'moves' : [6,7,8,9]
+        'moves' : []
        },
   'crntPlayer':function(){
                   return this[(this.counter++)%2+1];
-               }
+               },
+  'updateMoves':function(position){
+                  let crntPlayerMoves = this.crntPlayer().moves;
+                  crntPlayerMoves.push(position);
+                  return crntPlayerMoves;
+  }
 }
 
 exports.board = board;
