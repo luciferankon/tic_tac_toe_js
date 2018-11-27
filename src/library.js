@@ -28,12 +28,17 @@ let board = {
              }
 }
 
+const getName = function(){
+  let name = readline.question('who are you? ');
+  return name;
+}
+
 let players = {
   'counter' : 0,
-  '1': {'name' : 'ankon',
+  '1': {'name' : getName(),
         'moves' : [],
        },
-  '2': {'name' : 'dheeraj',
+  '2': {'name' : getName(),
         'moves' : [],
        },
   'crntPlayer':function(){
@@ -72,10 +77,12 @@ let symbolDetails = {
                  }
 }
 
-let runGame = function(){
+
+const runGame = function(){
   let crntSymbol = symbolDetails.crntSymbol();
   console.log(board.display());
-  while(true){
+  let turnNo = 0;
+  while(turnNo++!=9){
     let position = +readline.question("enter position");
     board.insert(crntSymbol(),position);
     console.log(board.display());
@@ -85,9 +92,9 @@ let runGame = function(){
       process.exit(1);
     }
   }
+  console.log('ARRRREEEEEY!!!!! GAME DRAW');
 }
 
-
-
+exports.runGame = runGame;
 exports.board = board;
 exports.players = players;
