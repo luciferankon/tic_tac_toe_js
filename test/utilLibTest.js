@@ -22,6 +22,7 @@ describe('is subset', function() {
   });
   it('should return true when some values are subset of super set', function(){
     assert.equal(isSubset([1,2,3],[1,2]),true);
+    assert.equal(isSubset([5,2,7,8],[2,5,8]),true);
   });
   it('should return false when no values are present in superset', function(){
     assert.equal(isSubset([1,2,3],[4,5]),false);

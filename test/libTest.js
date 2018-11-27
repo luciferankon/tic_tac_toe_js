@@ -44,9 +44,9 @@ describe('update player moveset',function(){
 describe('has won',function(){
   it('should return true when users moves is a superset of a winning condition',function(){
     players[1].moves = [1,2,3];
-    players[2].moves = [2,5,6];
+    players[2].moves = [2,5,7];
     assert.deepEqual(players.hasWon(9),{name: 'ankon', hasWon : true});
-    assert.deepEqual(players.hasWon(3),{name: 'dheeraj', hasWon : false});
+    assert.deepEqual(players.hasWon(8),{name: 'dheeraj', hasWon : true});
   });
 });
 
@@ -54,9 +54,9 @@ describe('display',function(){
   it('should return current player\'s data',function(){
     players[1].moves = [1,2,6];
     players[2].moves = [6,9,8];
-    assert.equal(players.display(3),'ankon has won');
-    assert.equal(players.display(3),'dheeraj has won');
-    assert.equal(players.display(3),'ankon has won');
-    assert.equal(players.display(3),'dheeraj has won');
+    assert.equal(players.displayResult(3),'ankon has won');
+    assert.equal(players.displayResult(3),'dheeraj has won');
+    assert.equal(players.displayResult(3),'ankon has won');
+    assert.equal(players.displayResult(3),'dheeraj has won');
   });
 });

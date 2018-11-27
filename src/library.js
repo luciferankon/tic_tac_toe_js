@@ -1,3 +1,10 @@
+let {initGrid,
+    separateRowColumn,
+    isSubset
+} = require('./utilLib.js');
+
+let readline = require('readline-sync');
+
 const winningCombinations = [[1,2,3],
                              [4,5,6],
                              [7,8,9],
@@ -7,11 +14,6 @@ const winningCombinations = [[1,2,3],
                              [1,5,9],
                              [3,5,7]];
 
-let {initGrid,
-    separateRowColumn,
-    isSubset
-} = require('./utilLib.js');
-
 let board = {
   'grid' : initGrid(),
   'display' : function(){
@@ -20,8 +22,8 @@ let board = {
                 ).join('\n---------\n')
                },
   'insert' : function(symbol,position){
-    let object = separateRowColumn(position);
-                this.grid[object.row][object.column]=symbol;
+                let cell = separateRowColumn(position);
+                this.grid[cell.row][cell.column]=symbol;
                 return this.grid;
              }
 }
@@ -32,7 +34,7 @@ let players = {
         'moves' : [],
        },
   '2': {'name' : 'dheeraj',
-        'moves' : []
+        'moves' : [],
        },
   'crntPlayer':function(){
                   return this[(this.counter++)%2+1];
@@ -49,15 +51,43 @@ let players = {
                 if(wonCondition.length) { 
                   return {name: crntPlayer.name, hasWon: true };
                 }
-              return {name: crntPlayer.name, hasWon: false};
+                return {name: crntPlayer.name, hasWon: false};
               },
-  'display' : function(position){
+  'displayResult' : function(position){
                 let result = this.hasWon(position);
                 if(result.hasWon){
                   return result.name + ' has won';
               }
   }
 }
+
+let symbolDetails = {
+  'symbols' : ['X','O'],
+  'crntSymbol' : function(){
+                    let index = 0;
+                    let symbols = this.symbols;
+                    return function(){
+                      return symbols[index++%2];
+                    }
+                 }
+}
+
+let runGame = function(){
+  let crntSymbol = symbolDetails.crntSymbol();
+  console.log(board.display());
+  while(true){
+    let position = +readline.question("enter position");
+    board.insert(crntSymbol(),position);
+    console.log(board.display());
+    let result = players.displayResult(position);
+    if(result){
+      console.log(result);
+      process.exit(1);
+    }
+  }
+}
+
+
 
 exports.board = board;
 exports.players = players;
